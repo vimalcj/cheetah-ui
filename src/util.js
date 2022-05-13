@@ -1,0 +1,1 @@
+export const baseUrl = 'https://promotionsbackend.r1.pcf.dell.com/'; 
