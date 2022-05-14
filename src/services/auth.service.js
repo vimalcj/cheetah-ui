@@ -14,7 +14,7 @@ const login = (username, password) => {
   console.log(username);
   console.log(password);
   return axios
-    .post(API_URL + "cheetah/login", {
+    .post(API_URL + "auth/login", {
       username,
       password,
     })

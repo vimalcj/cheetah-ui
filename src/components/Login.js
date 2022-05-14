@@ -47,8 +47,15 @@ const Login = () => {
 
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
-        () => {
-          navigate("/profile");
+        (data) => {
+         console.log(data)
+         let isAdmin = data.admin
+          if(isAdmin){
+            navigate("/admin");
+          }else{
+            navigate("/user");
+          }
+         
           window.location.reload();
         },
         (error) => {
@@ -69,7 +76,7 @@ const Login = () => {
   };
 
   return (
-    <div className="col-md-12">
+    <div className="col-md-12" style={{ backgroundColor: "#ffffff", padding: ".5rem" }}>
       <div className="card card-container">
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -102,8 +109,8 @@ const Login = () => {
             />
           </div>
 
-          <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={loading}>
+          <div className="form-group" >
+            <button className="btn  btn-block" disabled={loading} style ={{backgroundColor:"#ff1a1a", color:"white"}}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}

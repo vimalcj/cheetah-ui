@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/cheetah";
+const API_URL = "http://localhost:8080/auth";
 
 const getPublicContent = () => {
   return axios.get(API_URL + "all");
