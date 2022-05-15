@@ -7,16 +7,16 @@ import { Nav, Navbar } from "react-bootstrap";
 import AuthService from "./services/auth.service";
 
 import Login from "./components/Login";
-import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
-import Search from "./components/Search";
-
 // import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
+import AdminSearchPage from "./components/AdminSearchPage"
+import UserSearchPage from "./components/UserSearchPage"
+import EmployeeSearch from "./components/EmployeeSearch";
 
 const App = () => {
   // const [showUserBoard, setShowUserBoard] = useState(false);
@@ -94,7 +94,7 @@ const App = () => {
            
             {currentUser ? (
               <div className="navbar-nav ml-auto">
-                 <Search />
+                 {/* <SearchPage /> */}
                 <li className="nav-item">
                   <Link to={"/profile"} className="nav-link">
                     {currentUser.username}
@@ -129,6 +129,9 @@ const App = () => {
           <Route path="/user" element={<BoardUser />} />
           {/* <Route path="/mod" element={<BoardModerator />} /> */}
           <Route path="/admin" element={<BoardAdmin />} />
+          <Route path="/adminSearch" element={<AdminSearchPage />} />
+          <Route path="/search" element={<EmployeeSearch />} />
+          <Route path="/userSearch" element={<UserSearchPage />} />
         </Routes>
       </div>
 

@@ -1,1 +1,1 @@
-export const baseUrl = 'https://promotionsbackend.r1.pcf.dell.com/'; 
+export const baseUrl = 'https://namepronounciation-tool.azurewebsites.net/'; 
