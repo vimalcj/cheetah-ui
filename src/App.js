@@ -14,8 +14,8 @@ import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 // import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
-import AdminSearchPage from "./components/AdminSearchPage"
-import UserSearchPage from "./components/UserSearchPage"
+import AdminSearchPage from "./components/AdminSearchPage";
+import UserSearchPage from "./components/UserSearchPage";
 import EmployeeSearch from "./components/EmployeeSearch";
 
 const App = () => {
@@ -49,8 +49,72 @@ const App = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#ffffff", padding: ".5rem" }}>
-      <div>
+    <div style={{ backgroundColor: "#ffffff" }}>
+      <div
+        class="d-flex bd-highlight p-2"
+        style={{ backgroundColor: "#ff1a1a" }}
+      >
+        <div class="p-2 flex-grow-1 bd-highlight">
+          <ul className="list-inline ">
+            <li className="list-inline-item f-4">Cheetah</li>
+            <li className="list-inline-item">
+              <Link
+                to={
+                  showAdminBoard
+                    ? "/admin"
+                    : currentUser && !showAdminBoard
+                    ? "/user"
+                    : "/login"
+                }
+                className="nav-link"
+                style={{ color: "black" }}
+              >
+                Home
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div class="p-2 bd-highlight">
+          <form class="form-inline">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+        <div class="p-2 bd-highlight">
+        {currentUser ? (
+          <a
+            href="/login"
+            className="nav-link"
+            onClick={logOut}
+            style={{ color: "white" }}
+          >
+           Logout
+           
+          </a>
+        ):(
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link
+                to={"/login"}
+                className="nav-link"
+                style={{ color: "white" }}
+              >
+                Login
+              </Link>
+            </li>
+          </div>
+        )}
+        </div>
+      </div>
+      {/* <div>
         <Navbar
           collapseOnSelect
           expand="md"
@@ -60,14 +124,18 @@ const App = () => {
           fixed="top"
           style={{ backgroundColor: "#ff1a1a", padding: ".5rem" }}
         >
-          <Link to={"/"} className="navbar-brand" style={{color:"white"}}>
+          <Link to={"/"} className="navbar-brand" style={{ color: "white" }}>
             Cheetah
           </Link>
 
           {showAdminBoard && (
             <div className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to={"/admin"} className="nav-link" style={{color:"white"}}>
+                <Link
+                  to={"/admin"}
+                  className="nav-link"
+                  style={{ color: "white" }}
+                >
                   Home
                 </Link>
               </li>
@@ -77,7 +145,11 @@ const App = () => {
           {currentUser && !showAdminBoard ? (
             <div className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to={"/user"} className="nav-link" style={{color:"white"}}>
+                <Link
+                  to={"/user"}
+                  className="nav-link"
+                  style={{ color: "white" }}
+                >
                   Home
                 </Link>
               </li>
@@ -90,18 +162,36 @@ const App = () => {
             </div>
           )}
 
+          <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+                Search
+              </button>
+            </form>
+          </nav>
+
           <Nav className="ml-auto align-items-end px-3">
-           
             {currentUser ? (
               <div className="navbar-nav ml-auto">
-                 {/* <SearchPage /> */}
+                { <SearchPage />
                 <li className="nav-item">
                   <Link to={"/profile"} className="nav-link">
                     {currentUser.username}
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={logOut} style={{color:"white"}}>
+                  <a
+                    href="/login"
+                    className="nav-link"
+                    onClick={logOut}
+                    style={{ color: "white" }}
+                  >
                     Logout
                   </a>
                 </li>
@@ -109,7 +199,11 @@ const App = () => {
             ) : (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/login"} className="nav-link" style={{color:"white"}}>
+                  <Link
+                    to={"/login"}
+                    className="nav-link"
+                    style={{ color: "white" }}
+                  >
                     Login
                   </Link>
                 </li>
@@ -119,23 +213,22 @@ const App = () => {
         </Navbar>
       </div>
 
-      <div className="container mt-3">
+      <AuthVerify logOut={logOut}/> } */}
+      <div className="flex">
         <Routes>
           <Route exact path={"/"} element={<Home />} />
-          {/* <Route exact path={"/home"} element={<Home />} /> */}
+
           <Route exact path="/login" element={<Login />} />
-          {/* <Route exact path="/register" element={<Register />} /> */}
+
           <Route exact path="/profile" element={<Profile />} />
           <Route path="/user" element={<BoardUser />} />
-          {/* <Route path="/mod" element={<BoardModerator />} /> */}
+
           <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/adminSearch" element={<AdminSearchPage />} />
           <Route path="/search" element={<EmployeeSearch />} />
           <Route path="/userSearch" element={<UserSearchPage />} />
         </Routes>
       </div>
-
-      {/* <AuthVerify logOut={logOut}/> */}
     </div>
   );
 };

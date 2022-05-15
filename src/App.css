@@ -132,3 +132,16 @@ label {
 {
     color:#fff;
 }
+
+.header-navbar{
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+}
+
+.header-navbar li {
+  display: inline;
+
+  text-decoration: none;
+
+}

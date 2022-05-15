@@ -80,6 +80,8 @@ const RecordView = (props) => {
   const submitVoice = () => {
     console.log(mediaBlobUrl);
     console.log(user.userId);
+
+    const file = new File([mediaBlobUrl], "foo.mp3");
     //const newFile = URL.createObjectURL(mediaBlobUrl)
 
   //   const myFile = new File([mediaBlobUrl], 'sound.mp3', {
@@ -102,7 +104,7 @@ const RecordView = (props) => {
 //   var base64data = reader.result;                
 //   console.log(base64data);
 //}
-    VoiceUploadService.voiceUpload(mediaBlobUrl, user.userId).then(
+    VoiceUploadService.voiceUpload(file, user.userId).then(
       (data) => {
         console.log(data);
       },
