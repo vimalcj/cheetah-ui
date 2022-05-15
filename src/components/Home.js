@@ -7,19 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     console.log("****Calling use effect ****")
-    UserService.getPublicContent().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-
-        setContent(_content);
-      }
-    );
+   
   }, []);
 
   return (

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { Nav, Navbar } from "react-bootstrap";
 
 import AuthService from "./services/auth.service";
 
@@ -10,16 +9,13 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
-import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
-// import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
 import AdminSearchPage from "./components/AdminSearchPage";
 import UserSearchPage from "./components/UserSearchPage";
 import EmployeeSearch from "./components/EmployeeSearch";
 
 const App = () => {
-  // const [showUserBoard, setShowUserBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
@@ -43,7 +39,6 @@ const App = () => {
 
   const logOut = () => {
     AuthService.logout();
-    // setShowModeratorBoard(false);
     setShowAdminBoard(false);
     setCurrentUser(undefined);
   };
