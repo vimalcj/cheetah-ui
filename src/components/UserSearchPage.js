@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 
 const UserSearchPage = () => {
-    const [content, setContent] = useState("");
   
    
   

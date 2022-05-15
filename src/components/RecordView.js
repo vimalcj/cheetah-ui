@@ -2,15 +2,12 @@ import { useReactMediaRecorder } from "react-media-recorder";
 import React, { useEffect, useState } from "react";
 import AuthService from "../services/auth.service";
 import VoiceUploadService from "../services/voiceupload.service";
-import axios from "axios";
 
 const RecordView = (props) => {
   const [second, setSecond] = useState("00");
   const [minute, setMinute] = useState("00");
   const [isActive, setIsActive] = useState(false);
   const [counter, setCounter] = useState(0);
-  const [mediaFile, setMediaFile] = useState();
-   const [file, setFile] = React.useState("");
   let searchedItem;
   const user = AuthService.getCurrentUser();
   useEffect(() => {
@@ -81,29 +78,7 @@ const RecordView = (props) => {
     console.log(mediaBlobUrl);
     console.log(user.userId);
 
-    const file = new File([mediaBlobUrl], "foo.mp3");
-    //const newFile = URL.createObjectURL(mediaBlobUrl)
-
-  //   const myFile = new File([mediaBlobUrl], 'sound.mp3', {
-  //     type: mediaBlobUrl.type,
-  // });
-  // const base64File = convertFileToBase64(myFile);
-  // console.log(base64File);
-    //convertFileToBase64()
-   
-  //const file = await fetch(mediaBlobUrl).then(r => r.blob()).then(blobFile => new File([blobFile], "fileName", { type: blobFile.type }))
-  // const config = { responseType: 'blob' };
-  // axios.get(mediaBlobUrl, config).then(response => {
-  //     const file  =new File([response.data], "fileName"); 
-  //     console.log(file)
-  // });
-
-//   var reader = new FileReader();
-// reader.readAsDataURL(mediaBlobUrl); 
-// reader.onloadend = function() {
-//   var base64data = reader.result;                
-//   console.log(base64data);
-//}
+    const file = new File([mediaBlobUrl], "recordedVoice.mp3");
     VoiceUploadService.voiceUpload(file, user.userId).then(
       (data) => {
         console.log(data);

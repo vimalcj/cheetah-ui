@@ -1,9 +1,6 @@
 import React, { useState, useRef } from "react";
 
 const AdminSearchPage = () => {
-    const [content, setContent] = useState("");
-  
-
   
     return (
         <div className="container">

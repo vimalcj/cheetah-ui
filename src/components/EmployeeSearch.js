@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Input } from "semantic-ui-react";
-import SearchService from "../services/search.service";
 export default function EmployeeSearch() {
   const [APIData, setAPIData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -35,15 +34,6 @@ export default function EmployeeSearch() {
       setFilteredResults(APIData);
     }
 
-    // SearchService.search(value).then(
-    //     (response) => {
-    //      console.log(response)
-    //      let tmpArray = []
-    //      tmpArray.push(response)
-    //      setAPIData(tmpArray);
-    //      setFilteredResults(APIData)
-    //     }
-    //   );
   };
 
   return (
