@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const XmlUpload = () => {
 
     const [file, setFile] = useState()
-
+    const navigate = useNavigate();
     function handleChange(event) {
       setFile(event.target.files[0])
     }
@@ -22,6 +23,8 @@ const XmlUpload = () => {
       };
       axios.post(url, formData, config).then((response) => {
         console.log(response.data);
+        navigate("/admin");
+        window.location.reload();
       });
   
     }

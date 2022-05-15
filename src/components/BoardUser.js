@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 import AuthService from "../services/auth.service";
-import RecordDialog from "./RecordDialog";
 import RecordView from "./RecordView";
 
 
