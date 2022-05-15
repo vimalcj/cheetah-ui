@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Input } from "semantic-ui-react";
 import SearchService from "../services/search.service";
-import { useReactMediaRecorder } from "react-media-recorder";
 export default function EmployeeSearch() {
   const [APIData, setAPIData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
