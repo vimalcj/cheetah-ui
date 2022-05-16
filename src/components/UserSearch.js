@@ -26,11 +26,11 @@ export default function UserSearch() {
     audio.play();
   };
 
-  const startSearchingData = (key) =>{
-    console.log(key)
+  const startSearchingData = () =>{
+    console.log(searchTerm)
     axios
     .get(
-      baseUrl+"cheetah/genericSearch/employee/"+key
+      baseUrl+"cheetah/genericSearch/employee/"+searchTerm
     )
     .then((response) => {
       setAPIData(response.data);
