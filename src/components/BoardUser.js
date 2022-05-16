@@ -1,6 +1,6 @@
 import AuthService from "../services/auth.service";
 import RecordView from "./RecordView";
-
+import {MicFill } from 'react-bootstrap-icons';
 
 const BoardUser = () => {
   const user = AuthService.getCurrentUser();
@@ -14,16 +14,18 @@ const BoardUser = () => {
   return (
 
 
-<div class="card" >
- 
-  <div class="card-body">
-  <img src={user.imageUrl} class="card-img-top" alt="..." style={{ width : "150px", height:"150px"}}/>
-    <h5 class="card-title">{user.name}</h5>
-    <p class="card-text">My active recording</p>
-    <a href="#" class="btn btn-primary" onClick={ start(user.recordUrl)}>My Voice</a>
-    <RecordView/>
+<div className="record-section d-flex flex-column p-3">
+
   
-  </div>
+  <img src={user.imageUrl} className="card-img-top m-1 p-1 " alt="profile picture" style={{ width : "150px", height:"150px", background: "lightred"}}/>
+    <h5 className="card-title">{user.name.toUpperCase()}</h5>
+    <div className="current-voice">
+    <a href="#" onClick={ start(user.recordUrl)}> 
+    <MicFill />
+    </a>
+    </div>
+    <p>My active voice</p>
+    <RecordView/>
 </div>
      
   );

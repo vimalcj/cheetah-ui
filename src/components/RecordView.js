@@ -2,7 +2,7 @@ import { useReactMediaRecorder } from "react-media-recorder";
 import React, { useEffect, useState } from "react";
 import AuthService from "../services/auth.service";
 import VoiceUploadService from "../services/voiceupload.service";
-
+import { PlayFill, StopFill, MicFill, Upload } from 'react-bootstrap-icons';
 const RecordView = (props) => {
   const [second, setSecond] = useState("00");
   const [minute, setMinute] = useState("00");
@@ -78,7 +78,7 @@ const RecordView = (props) => {
     console.log(mediaBlobUrl);
     console.log(user.userId);
 
-    const file = new File([mediaBlobUrl], "recordedVoice.mp3");
+    const file = new File([mediaBlobUrl], "recordedVoice.wav");
     VoiceUploadService.voiceUpload(file, user.userId).then(
       (data) => {
         console.log(data);
@@ -95,104 +95,49 @@ const RecordView = (props) => {
   };
 
   return (
-    <div
-      class="container"
     
+    <div className="mt-4">
+      <h2 className="text-center"> Record a new voice</h2>
+    <button className="c-button"
+      style={{
+        backgroundColor: "#42b72a",
+      }}
+      onClick={() => {
+        if (!isActive) {
+          startRecording();
+        } else {
+          stopRecording();
+          stopTimer();
+        }
+
+        setIsActive(!isActive);
+      }}
     >
-      <div
-        className="col-md-6 col-md-offset-3"
-        style={{
-          backgroundColor: "black",
-          color: "white",
-          marginLeft: "357px",
-        }}
-      >
-        <div style={{ marginLeft: "20px", display: "flex" }}>
-          <label
-            style={{
-              fontSize: "15px",
-              fontWeight: "Normal",
-              // marginTop: "20px"
-            }}
-            htmlFor="icon-button-file"
-          >
-            <h3 style={{ marginLeft: "15px", fontWeight: "normal" }}>
-              Press the Start to record
-            </h3>
+      {isActive ? 
+      <><span className="d-none d-sm-inline">Stop</span> <StopFill /></>: 
+      <> <span className="d-none d-sm-inline">Record</span> <MicFill /></>
+      }
+     
+    </button>
+    <button className="c-button"
+      style={{
+        backgroundColor: "#df3636",
+      }}
+      onClick={start}
+    >
+      <span className="d-none d-sm-inline">Listen</span> <PlayFill  fontWeight={700} />
+    </button>
 
-            <div>
-              <button
-                style={{
-                  padding: "0.8rem 2rem",
-                  border: "none",
-                  marginLeft: "15px",
-                  fontSize: "1rem",
-                  cursor: "pointer",
-                  borderRadius: "5px",
-                  fontWeight: "bold",
-                  backgroundColor: "#42b72a",
-                  color: "white",
-                  transition: "all 300ms ease-in-out",
-                  transform: "translateY(0)",
-                }}
-                onClick={() => {
-                  if (!isActive) {
-                    startRecording();
-                  } else {
-                    stopRecording();
-                    stopTimer();
-                  }
-
-                  setIsActive(!isActive);
-                }}
-              >
-                {isActive ? "Stop" : "Start"}
-              </button>
-              <button
-                style={{
-                  padding: "0.8rem 2rem",
-                  border: "none",
-                  backgroundColor: "#df3636",
-                  marginLeft: "15px",
-                  fontSize: "1rem",
-                  cursor: "pointer",
-                  color: "white",
-                  borderRadius: "5px",
-                  fontWeight: "bold",
-                  transition: "all 300ms ease-in-out",
-                  transform: "translateY(0)",
-                }}
-                onClick={start}
-              >
-                Play
-              </button>
-
-              <button
-                style={{
-                  backgroundColor: "black",
-                  borderRadius: "8px",
-                  color: "white",
-                  padding: "0.8rem 2rem",
-                  border: "none",
-                  backgroundColor: "#f0f0f5",
-                  marginLeft: "15px",
-                  fontSize: "1rem",
-                  cursor: "pointer",
-                  borderRadius: "5px",
-                  fontWeight: "bold",
-                  transition: "all 300ms ease-in-out",
-                  transform: "translateY(0)",
-                }}
-                onClick={submitVoice}
-              >
-                Submit
-              </button>
-            </div>
-          </label>
-        </div>
-        <b></b>
-      </div>
-    </div>
+    <button className="c-button"
+      style={{
+        backgroundColor: "black",
+        
+      }}
+      onClick={submitVoice}
+    >
+      <span className="d-none d-sm-inline">Upload</span>  <Upload/>
+    </button>
+  </div>
   );
 };
 export default RecordView;

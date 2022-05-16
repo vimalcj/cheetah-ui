@@ -21,7 +21,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3} className="padding-0">
+        <Box className="padding-0">
           <Typography component={"div"}>{children}</Typography>
         </Box>
       )}
@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#F5F5F5",
     width: "100%",
-    marginTop: 50,  
     fontSize: "13px !important",
   },
 }));
