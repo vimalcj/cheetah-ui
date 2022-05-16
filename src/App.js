@@ -15,6 +15,7 @@ import EventBus from "./common/EventBus";
 import AdminSearchPage from "./components/AdminSearchPage";
 import UserSearchPage from "./components/UserSearchPage";
 import EmployeeSearch from "./components/EmployeeSearch";
+import UserSearch from "./components/UserSearch";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -109,106 +110,7 @@ const App = () => {
         )}
         </div>
       </div>
-      {/* <div>
-        <Navbar
-          collapseOnSelect
-          expand="md"
-          bg="#ff1a1a"
-          variant="light"
-          className="px-4 py-8"
-          fixed="top"
-          style={{ backgroundColor: "#ff1a1a", padding: ".5rem" }}
-        >
-          <Link to={"/"} className="navbar-brand" style={{ color: "white" }}>
-            Cheetah
-          </Link>
-
-          {showAdminBoard && (
-            <div className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link
-                  to={"/admin"}
-                  className="nav-link"
-                  style={{ color: "white" }}
-                >
-                  Home
-                </Link>
-              </li>
-            </div>
-          )}
-
-          {currentUser && !showAdminBoard ? (
-            <div className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link
-                  to={"/user"}
-                  className="nav-link"
-                  style={{ color: "white" }}
-                >
-                  Home
-                </Link>
-              </li>
-            </div>
-          ) : (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link"></Link>
-              </li>
-            </div>
-          )}
-
-          <nav className="navbar navbar-light bg-light">
-            <form className="form-inline">
-              <input
-                className="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-danger my-2 my-sm-0" type="submit">
-                Search
-              </button>
-            </form>
-          </nav>
-
-          <Nav className="ml-auto align-items-end px-3">
-            {currentUser ? (
-              <div className="navbar-nav ml-auto">
-                { <SearchPage />
-                <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
-                    {currentUser.username}
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <a
-                    href="/login"
-                    className="nav-link"
-                    onClick={logOut}
-                    style={{ color: "white" }}
-                  >
-                    Logout
-                  </a>
-                </li>
-              </div>
-            ) : (
-              <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link
-                    to={"/login"}
-                    className="nav-link"
-                    style={{ color: "white" }}
-                  >
-                    Login
-                  </Link>
-                </li>
-              </div>
-            )}
-          </Nav>
-        </Navbar>
-      </div>
-
-      <AuthVerify logOut={logOut}/> } */}
+    
       <div className="flex">
         <Routes>
           <Route exact path={"/"} element={<Home />} />
@@ -219,9 +121,10 @@ const App = () => {
           <Route path="/user" element={<BoardUser />} />
 
           <Route path="/admin" element={<BoardAdmin />} />
+          <Route path="/empSearch" element ={<UserSearch/>}/>
           <Route path="/adminSearch" element={<AdminSearchPage />} />
           <Route path="/search" element={<EmployeeSearch />} />
-          <Route path="/userSearch" element={<UserSearchPage />} />
+          <Route path="/userSearch" element={<UserSearch />} />
         </Routes>
       </div>
     </div>

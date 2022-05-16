@@ -12,8 +12,10 @@ const voiceUpload = function uploadFile(file, username) {
           'content-type': 'multipart/form-data',
         },
       };
-      axios.post(url, formData, config).then((response) => {
+      return axios.post(url, formData, config) .then((response) => {
+        console.log(response);
         console.log(response.data);
+        return response.data;
       });
 };
 
