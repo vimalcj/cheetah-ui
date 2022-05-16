@@ -112,7 +112,7 @@ const App = () => {
       </div>
     
       <div className="flex">
-        <Routes>
+        <Routes basename='/cheetah-ui'>
           <Route exact path={"/"} element={<Home />} />
 
           <Route exact path="/login" element={<Login />} />
