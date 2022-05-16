@@ -27,9 +27,10 @@ export default function UserSearch() {
   };
 
   const startSearchingData = (key) =>{
+    console.log(key)
     axios
     .get(
-      baseUrl+"/cheetah/genericSearch/employee/"+key
+      baseUrl+"cheetah/genericSearch/employee/"+key
     )
     .then((response) => {
       setAPIData(response.data);
