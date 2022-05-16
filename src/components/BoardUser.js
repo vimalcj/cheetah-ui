@@ -11,6 +11,7 @@ const BoardUser = () => {
   const navigate = useNavigate();
 
   function start() {
+    //user = AuthService.getCurrentUser();
     let media = user.recordUrl;
     let media_url = media + "&xyz=" + new Date();
     console.log(media_url);

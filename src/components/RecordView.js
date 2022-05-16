@@ -4,6 +4,7 @@ import AuthService from "../services/auth.service";
 import VoiceUploadService from "../services/voiceupload.service";
 import { PlayFill, StopFill, MicFill, Upload } from 'react-bootstrap-icons';
 import AlertMessage from "./AlertMessage";
+import axios from "axios";
 const RecordView = (props) => {
   const [second, setSecond] = useState("00");
   const [minute, setMinute] = useState("00");
@@ -59,52 +60,24 @@ const RecordView = (props) => {
   });
   console.log("deed", mediaBlobUrl);
 
-//   const convertFileToBase64 = (file) => new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-
-//     reader.onload = () => resolve({
-//         fileName: mediaBlobUrl.title,
-//         base64: reader.result
-//     });
-//     reader.onerror = reject;
-//     file = reader
-// });
-
-
-  // const alert = alert.show('Recorded voice uploaded successfully', {
-  //   timeout: 2000, // custom timeout just for this one alert
-  //   type: 'success',
-  //   onOpen: () => {
-  //     console.log('hey')
-  //   }, // callback that will be executed after this alert open
-  //   onClose: () => {
-  //     console.log('closed')
-  //   } // callback that will be executed after this alert is removed
-  // });
-
 
   const start = () => {
     let audio = new Audio(mediaBlobUrl);
     audio.play();
   };
 
-  // const callBlob = async(mediaBlobUrl) => {
-  //   const audioBlob = await fetch(mediaBlobUrl).then(r => r.blob());
-  //   return audioBlob;
-  // };
 
-  const submitVoice = () => {
-    console.log(mediaBlobUrl);
-    console.log(user.userId);
-    //let blobarr = callBlob(mediaBlobUrl);
-    const file = new File([mediaBlobUrl], "recordVoice.wav");
-    console.log(file)
-    VoiceUploadService.voiceUpload(file, user.userId).then(
+  const readBlob =(mediaBlobUrl) =>{
+    axios({
+      method: 'get',
+      url: mediaBlobUrl, 
+      responseType: 'blob'
+  }).then(function(response){
+    VoiceUploadService.voiceUpload(response.data, user.userId).then(
       (data) => {
         console.log(data);
         setIsAlertShow(true)
-       
+        localStorage.setItem("user", JSON.stringify(data));
       },
       (error) => {
         const resMessage =
@@ -115,6 +88,13 @@ const RecordView = (props) => {
           error.toString();
       }
     );
+  })
+  } 
+
+  const submitVoice = () => {
+    console.log(mediaBlobUrl);
+    console.log(user.userId);
+    readBlob(mediaBlobUrl)
   };
 
   const onAlertMessageClose = ()=>{
