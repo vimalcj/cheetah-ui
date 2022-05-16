@@ -6,12 +6,12 @@ const UserSearchPage = () => {
   
     return (
       <div className="container-fluid" style={{width:"100%"}}>
-       <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">My Profile</a>
+       <ul className="nav nav-tabs">
+    <li className="nav-item">
+      <a className="nav-link active" aria-current="page" href="#">My Profile</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+    <li className="nav-item">
+      <a className="nav-link" href="#">Link</a>
     </li>
   </ul>
       </div>

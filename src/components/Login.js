@@ -76,8 +76,8 @@ const Login = () => {
   };
 
   return (
-    <div className="col-md-12" style={{ backgroundColor: "#ffffff", padding: ".5rem" }}>
-      <div className="card card-container">
+    <div className="col-md-12 center" >
+      <div className="card card-container" style={{ backgroundColor: "#ffffff", padding: "20px", minWidth:"280px", margin: "20px auto", maxWidth:"400px" }}>
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
@@ -108,14 +108,16 @@ const Login = () => {
               validations={[required]}
             />
           </div>
-
+        
           <div className="form-group" >
-            <button className="btn  btn-block" disabled={loading} style ={{backgroundColor:"#ff1a1a", color:"white"}}>
+          <div class="text-center">
+            <button className="btn  btn-danger " disabled={loading} style ={{backgroundColor:"#ff1a1a", color:"white", padding: "10px", paddingLeft:"50px", paddingRight:"50px", marginTop:"10px"}}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
               <span>Login</span>
             </button>
+            </div>
           </div>
 
           {message && (

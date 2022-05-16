@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import { Soundwave } from 'react-bootstrap-icons';
 import AuthService from "./services/auth.service";
 
 import Login from "./components/Login";
@@ -46,13 +47,13 @@ const App = () => {
   return (
     <div style={{ backgroundColor: "#ffffff" }}>
       <div
-        class="d-flex bd-highlight p-2"
+        className="d-flex bd-highlight p-2"
         style={{ backgroundColor: "#ff1a1a" }}
       >
-        <div class="p-2 flex-grow-1 bd-highlight">
+        <div className="p-2 flex-grow-1 bd-highlight">
           <ul className="list-inline ">
-            <li className="list-inline-item f-4">Cheetah</li>
-            <li className="list-inline-item">
+            {/* <li className="list-inline-item f-4">C H E E T A H</li> */}
+            <li className="list-inline-item logo">
               <Link
                 to={
                   showAdminBoard
@@ -62,28 +63,27 @@ const App = () => {
                     : "/login"
                 }
                 className="nav-link"
-                style={{ color: "black" }}
               >
-                Home
+              <Soundwave size={30} />  C H E E T A H
               </Link>
             </li>
           </ul>
         </div>
 
-        <div class="p-2 bd-highlight">
-          <form class="form-inline">
+        {/* <div className="p-2 bd-highlight">
+          <form className="form-inline">
             <input
-              class="form-control mr-sm-2"
+              className="form-control mr-sm-2"
               type="search"
               placeholder="Search Here!"
               aria-label="Search"
             />
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+            <button className="btn btn-outline-danger my-2 my-sm-0" type="submit">
               Search
             </button>
           </form>
-        </div>
-        <div class="p-2 bd-highlight">
+        </div> */}
+        <div className="p-2 bd-highlight">
         {currentUser ? (
           <a
             href="/login"
@@ -157,15 +157,15 @@ const App = () => {
             </div>
           )}
 
-          <nav class="navbar navbar-light bg-light">
-            <form class="form-inline">
+          <nav className="navbar navbar-light bg-light">
+            <form className="form-inline">
               <input
-                class="form-control mr-sm-2"
+                className="form-control mr-sm-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+              <button className="btn btn-outline-danger my-2 my-sm-0" type="submit">
                 Search
               </button>
             </form>

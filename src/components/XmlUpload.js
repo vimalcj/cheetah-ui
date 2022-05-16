@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { MicFill } from 'react-bootstrap-icons';
 
 const XmlUpload = () => {
 
@@ -30,11 +31,11 @@ const XmlUpload = () => {
     }
   
     return (
-      <div className="App">
+      <div className="xml-upload p-3">
           <form onSubmit={handleSubmit}>
-            <h1>File Upload</h1>
+            <h2 className="p-2">Upload File</h2>
             <input type="file" onChange={handleChange}/>
-            <button type="submit">Upload</button>
+            <button className="btn btn-primary" type="submit">Upload <MicFill/></button>
           </form>
       </div>
     );

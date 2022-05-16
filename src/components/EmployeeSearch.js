@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Input } from "semantic-ui-react";
+import { PlayFill } from "react-bootstrap-icons";
+import VoiceReset from "../services/voicereset.service";
+
 export default function EmployeeSearch() {
   const [APIData, setAPIData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   useEffect(() => {
     axios
-      .get("https://namepronounciation-tool.azurewebsites.net/cheetah/getAllEmployees")
+      .get(
+        "https://namepronounciation-tool.azurewebsites.net/cheetah/getAllEmployees"
+      )
       .then((response) => {
         setAPIData(response.data);
       });
@@ -33,11 +38,35 @@ export default function EmployeeSearch() {
     } else {
       setFilteredResults(APIData);
     }
-
+  };
+  const resetData = (username) => {
+    VoiceReset.voiceReset(username).then(
+      (data) => {
+        console.log(data);
+        if (APIData != null) {
+          APIData.filter((i) => i.userId === username).map(
+            (m) => (m.recordUrl = data.recordUrl)
+          );
+        }
+        if (filteredResults != null) {
+          filteredResults
+            .filter((i) => i.userId === username)
+            .map((m) => (m.recordUrl = data.recordUrl));
+        }
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+      }
+    );
   };
 
   return (
-    <div style={{ padding: 50 }}>
+    <div className="container mt-4">
       <Input
         icon="search"
         placeholder="Search..."
@@ -47,60 +76,40 @@ export default function EmployeeSearch() {
         {searchTerm.length > 1
           ? filteredResults.map((item) => {
               return (
-                <Card>
-                  <Card.Content>
-                    <Card.Header>{item.name}</Card.Header>
-                    <Card.Description>
-                      <button
-                        style={{
-                          padding: "0.8rem 2rem",
-                          border: "none",
-                          backgroundColor: "#df3636",
-                          marginLeft: "15px",
-                          fontSize: "1rem",
-                          cursor: "pointer",
-                          color: "white",
-                          borderRadius: "5px",
-                          fontWeight: "bold",
-                          transition: "all 300ms ease-in-out",
-                          transform: "translateY(0)",
-                        }}
-                        onClick={() => start(item.recordUrl)}
-                      >
-                        Play
-                      </button>
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
+                <div className="c-card">
+                  <p>{item.name}</p>
+                  <button
+                    className="c-button play-btn"
+                    onClick={() => start(item.recordUrl)}
+                  >
+                    Play <PlayFill />
+                  </button>
+                  <button
+                    className="c-button play-btn"
+                    onClick={() => resetData(item.userId)}
+                  >
+                    Reset Voice <PlayFill />
+                  </button>
+                </div>
               );
             })
           : APIData.map((item) => {
               return (
-                <Card>
-                  <Card.Content>
-                    <Card.Header>{item.name}</Card.Header>
-                    <Card.Description>
-                      <button
-                        style={{
-                          padding: "0.8rem 2rem",
-                          border: "none",
-                          backgroundColor: "#df3636",
-                          marginLeft: "15px",
-                          fontSize: "1rem",
-                          cursor: "pointer",
-                          color: "white",
-                          borderRadius: "5px",
-                          fontWeight: "bold",
-                          transition: "all 300ms ease-in-out",
-                          transform: "translateY(0)",
-                        }}
-                        onClick={() => start(item.recordUrl)}
-                      >
-                        Play
-                      </button>
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
+                <div className="c-card">
+                  <p>{item.name}</p>
+                  <button
+                    className="c-button play-btn"
+                    onClick={() => start(item.recordUrl)}
+                  >
+                    Play <PlayFill />
+                  </button>
+                  <button
+                    className="c-button play-btn"
+                    onClick={() => resetData(item.userId)}
+                  >
+                    Reset Voice <PlayFill />
+                  </button>
+                </div>
               );
             })}
       </Card.Group>
