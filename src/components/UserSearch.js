@@ -2,24 +2,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Input } from "semantic-ui-react";
 import { PlayFill, RecordBtn } from "react-bootstrap-icons";
-import VoiceReset from "../services/voicereset.service";
-import { withAlert } from "react-alert";
-import Alert from "./AlertMessage";
-import AlertMessage from "./AlertMessage";
+import { baseUrl } from "../util";
 
-export default function EmployeeSearch() {
+export default function UserSearch() {
   const [APIData, setAPIData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
-  const [isAlertShow, setIsAlertShow] = useState(false);
+  const [searchKey, setSearchKey] = useState("");
   useEffect(() => {
-    axios
-      .get(
-        "https://namepronounciation-tool.azurewebsites.net/cheetah/getAllEmployees"
-      )
-      .then((response) => {
-        setAPIData(response.data);
-      });
+    // axios
+    //   .get(
+    //     "https://namepronounciation-tool.azurewebsites.net/cheetah/getAllEmployees"
+    //   )
+    //   .then((response) => {
+    //     setAPIData(response.data);
+    //   });
   }, []);
 
   const start = (media) => {
@@ -29,62 +26,22 @@ export default function EmployeeSearch() {
     audio.play();
   };
 
-  // const alert = alert.show('Voice reset successfully', {
-  //   timeout: 2000, // custom timeout just for this one alert
-  //   type: 'success',
-  //   onOpen: () => {
-  //     console.log('hey')
-  //   }, // callback that will be executed after this alert open
-  //   onClose: () => {
-  //     console.log('closed')
-  //   } // callback that will be executed after this alert is removed
-  // });
+  const startSearchingData = (key) =>{
+    axios
+    .get(
+      baseUrl+"/cheetah/genericSearch/employee/"+key
+    )
+    .then((response) => {
+      setAPIData(response.data);
+      setFilteredResults(response.data)
+    }); 
+  }
+
 
   const searchData = (value) => {
     setSearchTerm(value);
-    if (searchTerm !== "") {
-      const filteredData = APIData.filter((item) => {
-        return Object.values(item)
-          .join("")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setFilteredResults(filteredData);
-    } else {
-      setFilteredResults(APIData);
-    }
-  };
-  const resetData = (username) => {
-    VoiceReset.voiceReset(username).then(
-      (data) => {
-        console.log(data);
-        <Alert alert=" Message" />;
-
-        if (APIData != null) {
-          APIData.filter((i) => i.userId === username).map(
-            (m) => (m.recordUrl = data.recordUrl)
-          );
-        }
-        if (filteredResults != null) {
-          filteredResults
-            .filter((i) => i.userId === username)
-            .map((m) => (m.recordUrl = data.recordUrl));
-        }
-      },
-      (error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-      }
-    );
   };
 
-  const onAlertMessageClose = ()=>{
-    setIsAlertShow(false)
-  }
 
   return (
     <div className="container mt-4">
@@ -94,6 +51,9 @@ export default function EmployeeSearch() {
         placeholder="Search..."
         onChange={(e) => searchData(e.target.value)}
       />
+       <button className="btn btn-outline-danger my-2 my-sm-0" type="submit" onClick={startSearchingData} >
+              Search
+            </button>
       <Card.Group itemsPerRow={3} style={{ marginTop: 20 }}>
         {searchTerm.length > 1
           ? filteredResults.map((item) => {
@@ -127,12 +87,7 @@ export default function EmployeeSearch() {
                       >
                         Play <PlayFill />
                       </button>
-                      <button
-                        className="c-button play-btn"
-                        onClick={() => resetData(item.userId)}
-                      >
-                        Reset Voice <PlayFill />
-                      </button>
+                      
                     </div>
                   </div>
                 </div>
@@ -167,22 +122,13 @@ export default function EmployeeSearch() {
                       >
                         Play <PlayFill />
                       </button>
-                      <button
-                        className="c-button play-btn"
-                        onClick={() => resetData(item.userId)}
-                      >
-                        Reset Voice <RecordBtn />
-                      </button>
+                     
                     </div>
                   </div>
                 </div>
               );
             })}
-            {/* <div className="container"   style={{ marginTop: "50px", paddingBottom: "10px"}}>
-    {isAlertShow && (<AlertMessage message = "Voice saved successfully" handleClose = {() => onAlertMessageClose()}></AlertMessage>)}
-    </div> */}
       </Card.Group>
-      
     </div>
   );
 }

@@ -75,17 +75,17 @@ const BoardAdmin = () => {
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
-          textColor="primary"
+          textColor="#ff1a1a"
           variant="fullWidth"
           aria-label="full width tabs example"
         >
           <Tab
-            label="My Profile"
+            label="Employees"
             {...a11yProps(0)}
             className="flex-grow-0 min-width-100 text-trans-L"
           />
           <Tab
-            label="XML Upload"
+            label="Onboard"
             {...a11yProps(1)}
             className="flex-grow-0 text-trans-L"
           />
