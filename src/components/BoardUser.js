@@ -1,21 +1,32 @@
 import AuthService from "../services/auth.service";
 import RecordView from "./RecordView";
+import React, { useState, useEffect } from "react";
 import { MicFill } from "react-bootstrap-icons";
 import { Input } from "semantic-ui-react";
 import UserSearch from "./UserSearch";
 import { useNavigate } from "react-router-dom";
 
-const BoardUser = () => {
-  // const [pageState, setPageState] = useState(false);
+const BoardUser = (props) => {
   const user = AuthService.getCurrentUser();
   const navigate = useNavigate();
+  const [voiceUrl, setVoiceUrl] = useState(user.recordUrl);
+
+
+  const onVideoUrlChange = (url)=>{
+    setVoiceUrl(url)
+  }
 
   function start() {
-    //user = AuthService.getCurrentUser();
-    let media = user.recordUrl;
+    let media = voiceUrl
+    // if (voiceUrl === null || voiceUrl === undefined) {
+    //   media = user.recordUrl;
+    // } else {
+    //   media = voiceUrl;
+    // }
+
     let media_url = media + "&xyz=" + new Date();
     console.log(media_url);
-    let audio = new Audio(media);
+    let audio = new Audio(media_url);
     audio.play();
   }
 
@@ -54,7 +65,7 @@ const BoardUser = () => {
           <p>
             <b>My voice</b>
           </p>
-          <RecordView />
+          <RecordView url = {voiceUrl} resetVoice = {() => onVideoUrlChange()}/>
         </div>
       </div>
     </div>

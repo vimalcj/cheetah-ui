@@ -11,6 +11,7 @@ const RecordView = (props) => {
   const [isActive, setIsActive] = useState(false);
   const [counter, setCounter] = useState(0);
   const [isAlertShow, setIsAlertShow] = useState(false);
+  const [voiceUrl, setVoiceUrl ] = useState("");
   let searchedItem;
   const user = AuthService.getCurrentUser();
   useEffect(() => {
@@ -78,6 +79,10 @@ const RecordView = (props) => {
         console.log(data);
         setIsAlertShow(true)
         localStorage.setItem("user", JSON.stringify(data));
+        setVoiceUrl(data.recordUrl)
+        voiceUrl = data.recordUrl
+        props.url = voiceUrl 
+        props.resetVoice(voiceUrl)
       },
       (error) => {
         const resMessage =
